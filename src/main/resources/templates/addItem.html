@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Add Item</title>
+
+<!-- Bootstrap Core CSS -->
+<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link th:href="@{css/shop-homepage.css}" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<form autocomplete="off" action="#" th:action="@{/add}"
+					th:object="${food}" method="post" enctype="multipart/form-data" class="form-horizontal"
+					role="form">
+					<h2>Add Food</h2>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								class="validation-message"></label> <input type="text"
+								th:field="*{name}" placeholder="Name" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<label th:if="${#fields.hasErrors('detail')}"
+								th:errors="*{detail}" class="validation-message"></label> <input
+								type="text" th:field="*{detail}" placeholder="detail"
+								class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{price}" placeholder="price"
+								class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{discount}" placeholder="discount"
+								class="form-control" /> 
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<input type="text" th:field="*{promotionCode}" placeholder="promotionCode"
+								class="form-control" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+					<div class="col-sm-9">
+					 <input type="file" th:name="file" />
+					</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Save</button>
+						</div>
+					</div>
+
+					<span th:utext="${success}"></span>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
