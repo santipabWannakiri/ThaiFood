@@ -70,7 +70,7 @@ public class FoodServiceImp implements FoodService{
 
 	@Override
 	public List<Food> findByActiveTure() {
-		List<Food> food = foodrepo.findByActiveTrue();
+		List<Food> food = foodrepo.findByActive();
 		//System.out.println(food.toString() );
 		
 		return food;

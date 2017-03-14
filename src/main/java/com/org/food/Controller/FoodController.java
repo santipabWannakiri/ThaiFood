@@ -39,7 +39,7 @@ public class FoodController {
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}
 
@@ -49,7 +49,7 @@ public class FoodController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("Uname", "Hi" + user.getName());
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}
 
