@@ -1,0 +1,89 @@
+.head-categories-text {
+    color: #23af70!important;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.categories-text {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.line-menu {
+    border-bottom: 1px solid #dcdcdc;
+    color: #3e4136;
+}
+
+.line-sortby {
+    border-bottom: 2px solid #dcdcdc;
+    margin-bottom: 20px;
+}
+.line-kids{
+    margin-top: 15px;
+    margin-bottom: 40px;
+   border-bottom: 1px solid #dcdcdc;  
+}
+.kids-text{
+      font-size: 30px;
+    font-weight: bold;
+}
+
+a:focus,
+a:hover {
+    color: #2bb971;
+    text-decoration: underline;
+}
+
+.popular-cat {
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 140px;
+}
+
+.popular-cat-label{
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+    padding-right: 10px;
+}
+
+
+.current-promotion{
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}   
+
+
+.fancy {
+  line-height: 0.5;
+  text-align: center;
+  max-width: 100%;
+}
+.fancy span {
+  display: inline-block;
+  position: relative;  
+}
+.fancy span:before,
+.fancy span:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid #333;
+  top: 0;
+  width: 600px;
+}
+.fancy span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.fancy span:after {
+  left: 100%;
+  margin-left: 15px;
+}

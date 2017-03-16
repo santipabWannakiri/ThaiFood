@@ -1,8 +1,3 @@
-.hi-text{
-color: #d00808;
-font-size: 14px;
-}
-
 .text-white {
   color: #fff!important;
 }
@@ -96,10 +91,11 @@ background-color: #2bb673;
 
 .banner-full {
   margin-bottom: 30px;
-  background-image: url("/ImageSystem/banner.jpg");
+  background-image: url("../image/banner.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+
   width: 100%;
   height: 400px;
 }
@@ -278,7 +274,7 @@ text-align: center;
 
 .whyVita_01 {
   margin-top: 30px;
-  background-image: url("/ImageSystem/whyVita_003.png");
+  background-image: url("../image/whyVita_003.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -287,10 +283,21 @@ text-align: center;
   height: 100px;
 }
 
+.whyVita_02 {
+  margin-top: 30px;
+  background-image: url("../image/whyVita_05.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 80px;
+}
+
 
 .whyVita_03 {
   margin-top: 30px;
-  background-image: url("/ImageSystem/whyVita_009.png");
+  background-image: url("../image/whyVita_009.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -302,7 +309,7 @@ text-align: center;
 
 .whyVita_04 {
   margin-top: 30px;
-  background-image: url("/ImageSystem/whyVita_111.png");
+  background-image: url("../image/whyVita_111.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -314,7 +321,7 @@ text-align: center;
 
 .whyVita_05 {
   margin-top: 30px;
-  background-image: url("/ImageSystem/whyVita_113.png");
+  background-image: url("../image/whyVita_113.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -326,7 +333,7 @@ text-align: center;
 
 .whyVita_06 {
   margin-top: 30px;
-  background-image: url("/ImageSystem/whyVita_155.png");
+  background-image: url("../image/whyVita_155.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -349,6 +356,5 @@ text-align: center;
     color: #fff;
     background-color: #2bb673;
 }
-
 
 

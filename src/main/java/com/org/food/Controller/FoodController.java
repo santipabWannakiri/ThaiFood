@@ -35,6 +35,17 @@ public class FoodController {
 	@Autowired
 	private UserService userService;
 
+	
+	@GetMapping("/show")
+	public ModelAndView show() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		modelAndView.setViewName("product");
+		return modelAndView;
+	}
+
+	
+	
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
