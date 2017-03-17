@@ -293,7 +293,7 @@
 						th:src="*{food.image}" class="center-block" alt="">
 					<div class="caption">
 						<h4 class="text-center">
-							<a href="#" th:text="*{food.name}"></a>
+							<a th:href="${'/product/show/' + food.id}" th:text="*{food.name}"></a>
 						</h4>
 						<h4 class="text-center" th:text="'$'+*{food.price}"></h4>
 						<p th:text="*{food.detail}"></p>

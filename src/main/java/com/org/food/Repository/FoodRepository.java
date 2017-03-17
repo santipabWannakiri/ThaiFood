@@ -18,4 +18,7 @@ public interface FoodRepository extends CrudRepository<Food,Integer> {
 	 
 	 @Query("SELECT f from Food f WHERE f.id=?")
 	 List<Food> findforDelelte(Integer id);
+	 
+	 @Query("SELECT f from Food f WHERE f.id=?")
+	 Food findById(Integer id);
 }

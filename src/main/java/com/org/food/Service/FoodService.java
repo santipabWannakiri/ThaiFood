@@ -13,4 +13,5 @@ public interface FoodService {
 	public List<Food> findByActiveTure();
 	public void Delete(Integer id);
 	public Food Edit(Integer id);
+	public Food ShowProducts(Integer id);
 }

@@ -65,8 +65,14 @@ public class FoodServiceImp implements FoodService{
 	}
 
 
+		
 
 
+	@Override
+	public Food ShowProducts(Integer id) {
+		Food food = foodrepo.findById(id);
+		return food;
+	}
 
 	@Override
 	public List<Food> findByActiveTure() {

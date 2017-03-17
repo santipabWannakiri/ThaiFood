@@ -130,6 +130,17 @@ public class FoodController {
 		return modelAndView;
 
 	}
+	
+	@GetMapping("product/show/{id}")
+	public ModelAndView ShowDetailProducts(@PathVariable Integer id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Food food = foodservice.ShowProducts(id);
+		modelAndView.addObject("Products", food);
+		modelAndView.setViewName("product");
+
+		return modelAndView;
+
+	}
 
 	@PostMapping("/SaveEdit")
 	public ModelAndView SaveEdit(@Valid Food food) {
