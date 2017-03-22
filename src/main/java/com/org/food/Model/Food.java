@@ -2,6 +2,7 @@ package com.org.food.Model;
 
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -40,8 +42,8 @@ public class Food {
 	@Column(name = "promotionCode")
 	private String promotionCode;
 
-	@Column(name = "image")
-	private String image;
+	@OneToMany(mappedBy="food")
+	private List<Images> images;
 
 	// name="createBy" << show to name column in database
 	@ManyToOne
@@ -105,12 +107,12 @@ public class Food {
 		this.promotionCode = promotionCode;
 	}
 
-	public String getImage() {
-		return image;
+	public List<Images> getImages() {
+		return images;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImages(List<Images> images) {
+		this.images = images;
 	}
 
 	public User getReferUser() {
@@ -148,12 +150,11 @@ public class Food {
 	@Override
 	public String toString() {
 		return "Food [id=" + id + ", name=" + name + ", detail=" + detail + ", price=" + price + ", discount="
-				+ discount + ", promotionCode=" + promotionCode + ", image=" + image + ", referUser=" + referUser
+				+ discount + ", promotionCode=" + promotionCode + ", images=" + images + ", referUser=" + referUser
 				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", active=" + active + "]";
 	}
 
 	
-
 	
 	
 }

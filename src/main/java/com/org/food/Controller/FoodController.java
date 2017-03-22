@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,8 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.org.food.Model.Food;
+import com.org.food.Model.Images;
+import com.org.food.Model.SeacrFood;
 import com.org.food.Model.User;
+import com.org.food.Repository.FoodRepository;
+import com.org.food.Repository.ImagesReposotiry;
 import com.org.food.Service.FoodService;
+import com.org.food.Service.ImagesService;
 import com.org.food.Service.UserService;
 
 @Controller
@@ -31,11 +37,19 @@ public class FoodController {
 
 	@Autowired
 	private FoodService foodservice;
+	
+	@Autowired
+	FoodRepository foodrepo;
+	
+	@Autowired
+	ImagesReposotiry imagerepo;
+	
+	@Autowired
+	private ImagesService imageservice;
 
 	@Autowired
 	private UserService userService;
 
-	
 	@GetMapping("/show")
 	public ModelAndView show() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -44,12 +58,14 @@ public class FoodController {
 		return modelAndView;
 	}
 
-	
-	
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		SeacrFood search;
+		search=foodservice.findByActiveTure();
+		//modelAndView.addObject("FoodList", search);
+		System.out.println(search.toString());
+		
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}
@@ -81,27 +97,35 @@ public class FoodController {
 	}
 
 	@PostMapping("/add")
-	public ModelAndView SaveItem(@Valid Food food, @RequestParam("file") MultipartFile file,
+	public ModelAndView SaveItem(@Valid Food food, @RequestParam("file") MultipartFile[] file,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		String paths = null;
+
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("addItem");
 		} else {
-			try {
 
-				byte[] bytes = file.getBytes();
-				Path path = Paths.get(UPLOAD_FOLDER + file.getOriginalFilename());
-				paths = UPLOAD_FOLDER + file.getOriginalFilename();
-				Files.write(path, bytes);
-				filename = "/ImageFood/" + file.getOriginalFilename();
-				System.out.println("Save Image : " + paths);
-			} catch (IOException e) {
-				e.printStackTrace();
+			foodservice.Save(food);
+
+			for (MultipartFile files : file) {
+				try {
+					byte[] bytes = files.getBytes();
+					Path path = Paths.get(UPLOAD_FOLDER + files.getOriginalFilename());
+					paths = UPLOAD_FOLDER + files.getOriginalFilename();
+					Files.write(path, bytes);
+
+					filename = "/ImageFood/" + files.getOriginalFilename();
+					System.out.println("Save to DB : " + filename);
+					imageservice.SaveImage(food, filename);
+					System.out.println("Save Image : " + paths);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 
 			modelAndView.addObject("food", new Food());
-			foodservice.Save(food, filename);
 			modelAndView.addObject("success", "Add Item Successfully !!!");
 			modelAndView.setViewName("addItem");
 
@@ -130,7 +154,7 @@ public class FoodController {
 		return modelAndView;
 
 	}
-	
+
 	@GetMapping("product/show/{id}")
 	public ModelAndView ShowDetailProducts(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView();
