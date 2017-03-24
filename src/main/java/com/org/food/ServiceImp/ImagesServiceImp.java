@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.org.food.Model.Food;
 import com.org.food.Model.Images;
+import com.org.food.Repository.CustomImageRepository;
 import com.org.food.Repository.ImagesReposotiry;
 import com.org.food.Service.ImagesService;
 @Service("ImagesServiceImp")
@@ -12,6 +13,9 @@ public class ImagesServiceImp implements ImagesService{
 
 	@Autowired
 	ImagesReposotiry imagerepo;
+	
+	@Autowired
+	CustomImageRepository customImage;
 
 	@Override
 	public void SaveImage(Food food,String path) {
@@ -22,6 +26,12 @@ public class ImagesServiceImp implements ImagesService{
 		
 		imagerepo.save(image);
 	
+	}
+
+	@Override
+	public void GetListImage(int index) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

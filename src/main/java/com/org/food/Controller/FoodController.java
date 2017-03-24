@@ -23,6 +23,7 @@ import com.org.food.Model.Food;
 import com.org.food.Model.Images;
 import com.org.food.Model.SeacrFood;
 import com.org.food.Model.User;
+import com.org.food.Repository.CustomImageRepository;
 import com.org.food.Repository.FoodRepository;
 import com.org.food.Repository.ImagesReposotiry;
 import com.org.food.Service.FoodService;
@@ -49,6 +50,9 @@ public class FoodController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CustomImageRepository cus;
 
 	@GetMapping("/show")
 	public ModelAndView show() {
@@ -61,10 +65,9 @@ public class FoodController {
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
-		SeacrFood search;
-		search=foodservice.findByActiveTure();
+		//foodservice.findByActiveTure();
 		//modelAndView.addObject("FoodList", search);
-		System.out.println(search.toString());
+		cus.GetListImage();
 		
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;

@@ -6,6 +6,6 @@ import com.org.food.Model.Images;
 public interface ImagesService {
 	
 	public void SaveImage(Food food,String path);
-	
+	public void GetListImage(int index);
 
 }
