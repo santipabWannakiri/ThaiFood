@@ -19,62 +19,56 @@ import com.org.food.Service.ImagesService;
 import com.org.food.Service.UserService;
 
 @Service("FoodService")
-public class FoodServiceImp implements FoodService{
-	
+public class FoodServiceImp implements FoodService {
+
 	@Autowired
 	private FoodRepository foodrepo;
 
 	@Autowired
-	private UserService userService; 
-	
+	private UserService userService;
 
 	@Override
 	public void Save(Food food) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<User> user = userService.findByEmailList(auth.getName());
-		//System.out.println("CreateBy Name: "+user.get(1)+" ID: "+user.get(0));
-		
-		
+		// System.out.println("CreateBy Name: "+user.get(1)+" ID:
+		// "+user.get(0));
+
 		food.setName(food.getName());
 		food.setDetail(food.getDetail());
 		food.setDiscount(food.getDiscount());
 		food.setPrice(food.getDiscount());
 		food.setPromotionCode(food.getPromotionCode());
-		//food.setImage(path);
+		// food.setImage(path);
 		food.setCreateDate(setCreateDate());
 		food.setActive(true);
 		food.setReferUser(user.get(0));
 		foodrepo.save(food);
-		
+
 		System.out.println("Save Food Successfully !!");
-		
-		
+
 	}
-	
+
 	@Override
 	public void SaveEdit(Food food) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<User> user = userService.findByEmailList(auth.getName());
-		
+
 		food.setName(food.getName());
 		food.setDetail(food.getDetail());
 		food.setDiscount(food.getDiscount());
 		food.setPrice(food.getDiscount());
 		food.setPromotionCode(food.getPromotionCode());
-		//food.setImage(food.getImage());
+		// food.setImage(food.getImage());
 		food.setCreateDate(food.getCreateDate());
 		food.setLastUpdate(setCreateDate());
 		food.setActive(true);
 		food.setReferUser(user.get(0));
-		
+
 		foodrepo.save(food);
-		
+
 		System.out.println("Edit Food Successfully !!");
 	}
-
-
-		
-
 
 	@Override
 	public Food ShowProducts(Integer id) {
@@ -83,43 +77,32 @@ public class FoodServiceImp implements FoodService{
 	}
 
 	@Override
-	public SeacrFood findByActiveTure() {
-		SeacrFood food = foodrepo.findByActive();
-		//System.out.println(food.toString() );
-		
+	public List<Food> findByActiveTure() {
+		List<Food> food = foodrepo.findByActive();
+		// System.out.println(food.toString() );
+
 		return food;
 	}
-	
-	
-	
-	
 
 	@Override
 	public void Delete(Integer id) {
 		List<Food> listFood = foodrepo.findforDelelte(id);
-		for( Food food : listFood){
+		for (Food food : listFood) {
 			food.setActive(false);
 			foodrepo.save(food);
-			System.out.println("ID : "+food.getId() + "Active SET : " + food.getActive() );
+			System.out.println("ID : " + food.getId() + "Active SET : " + food.getActive());
 		}
-		
+
 	}
-
-
-	
-
 
 	@Override
 	public Food Edit(Integer id) {
 		return foodrepo.findOne(id);
 	}
 
-
-
-
-	public Date setCreateDate(){
+	public Date setCreateDate() {
 		Date date = new Date();
 		return date;
 	}
-	
+
 }

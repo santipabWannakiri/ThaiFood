@@ -11,7 +11,7 @@ public interface FoodService {
 
 	public void Save(Food food ); 
 	public void SaveEdit(Food food);
-	public SeacrFood findByActiveTure();
+	public List<Food> findByActiveTure();
 	public void Delete(Integer id);
 	public Food Edit(Integer id);
 	public Food ShowProducts(Integer id);

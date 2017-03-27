@@ -39,11 +39,6 @@ public class FoodController {
 	@Autowired
 	private FoodService foodservice;
 	
-	@Autowired
-	FoodRepository foodrepo;
-	
-	@Autowired
-	ImagesReposotiry imagerepo;
 	
 	@Autowired
 	private ImagesService imageservice;
@@ -66,9 +61,8 @@ public class FoodController {
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
 		//foodservice.findByActiveTure();
-		//modelAndView.addObject("FoodList", search);
-		cus.GetListImage();
-		
+		modelAndView.addObject("FoodList",foodservice.findByActiveTure());
+
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}

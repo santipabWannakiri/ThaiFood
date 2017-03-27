@@ -34,6 +34,11 @@ public class ImagesServiceImp implements ImagesService{
 		
 	}
 
+	@Override
+	public String GetOneImage(int index) {
+		return customImage.GetOneImage(index);
+	}
+
 	
 	
 			
