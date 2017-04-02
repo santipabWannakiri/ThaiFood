@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Food {
 	@Column(name = "promotionCode")
 	private String promotionCode;
 
-	@OneToMany(mappedBy="food")
+	@OneToMany(cascade=CascadeType.ALL ,mappedBy="food")
 	private List<Images> images;
 
 	// name="createBy" << show to name column in database
@@ -55,7 +56,10 @@ public class Food {
 	
 	@Column(name="lastUpdate")
 	private Date lastUpdate;
-
+	
+	@Column(name="PicCover")
+	private String PicCover;
+	
 	@Column(name = "active")
 	private Boolean active;
 
@@ -139,6 +143,14 @@ public class Food {
 		this.lastUpdate = lastUpdate;
 	}
 
+	public String getPicCover() {
+		return PicCover;
+	}
+
+	public void setPicCover(String picCover) {
+		PicCover = picCover;
+	}
+
 	public Boolean getActive() {
 		return active;
 	}
@@ -151,8 +163,11 @@ public class Food {
 	public String toString() {
 		return "Food [id=" + id + ", name=" + name + ", detail=" + detail + ", price=" + price + ", discount="
 				+ discount + ", promotionCode=" + promotionCode + ", images=" + images + ", referUser=" + referUser
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", active=" + active + "]";
+				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", PicCover=" + PicCover + ", active="
+				+ active + "]";
 	}
+
+	
 
 	
 	

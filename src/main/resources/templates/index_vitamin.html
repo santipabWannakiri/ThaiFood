@@ -289,8 +289,8 @@
 			<div class="row">
 				<div class="col-sm-3 col-lg-3 col-md-3 "
 					th:each="food : ${FoodList}">
-<!-- 					<img th:src="*{'../../static'+food.image}" width="200" -->
-<!-- 						th:src="*{food.image}" class="center-block" alt=""> -->
+					<img th:src="*{food.PicCover}" width="200"
+						th:src="*{food.PicCover}" class="center-block" alt="">
 					<div class="caption">
 						<h4 class="text-center">
 							<a th:href="${'/product/show/' + food.id}" th:text="*{food.name}"></a>

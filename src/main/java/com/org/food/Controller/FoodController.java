@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.hamcrest.collection.IsEmptyCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -38,14 +41,16 @@ public class FoodController {
 
 	@Autowired
 	private FoodService foodservice;
-	
-	
+
 	@Autowired
 	private ImagesService imageservice;
 
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private ImagesService imService;
+
 	@Autowired
 	private CustomImageRepository cus;
 
@@ -60,9 +65,9 @@ public class FoodController {
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
-		//foodservice.findByActiveTure();
-		modelAndView.addObject("FoodList",foodservice.findByActiveTure());
-
+		// foodservice.findByActiveTure();
+		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		// cus.GetListImage(4);
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}
@@ -96,14 +101,16 @@ public class FoodController {
 	@PostMapping("/add")
 	public ModelAndView SaveItem(@Valid Food food, @RequestParam("file") MultipartFile[] file,
 			BindingResult bindingResult) {
+		
 		ModelAndView modelAndView = new ModelAndView();
+		final String NoimagePath = "/ImageSystem/no-image.png";
 		String paths = null;
-
+		List<String> Checkpath = new ArrayList<String>();
+		
+		
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("addItem");
 		} else {
-
-			foodservice.Save(food);
 
 			for (MultipartFile files : file) {
 				try {
@@ -111,23 +118,37 @@ public class FoodController {
 					Path path = Paths.get(UPLOAD_FOLDER + files.getOriginalFilename());
 					paths = UPLOAD_FOLDER + files.getOriginalFilename();
 					Files.write(path, bytes);
-
 					filename = "/ImageFood/" + files.getOriginalFilename();
 					System.out.println("Save to DB : " + filename);
-					imageservice.SaveImage(food, filename);
+					Checkpath.add(filename);
 					System.out.println("Save Image : " + paths);
-
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-
+			// if List Image Path Empty add all picture no image
+			if (Checkpath.isEmpty()) {
+				for (int loop = 0; loop < 4; loop++) {
+					Checkpath.add(NoimagePath);
+				}
+			} else if ((Checkpath.size()-1) != 3) {
+				for (int loop = Checkpath.size(); loop < 4; loop++) {
+					Checkpath.add(NoimagePath);
+				}
+			}
+			// Set Path Image for cover & save Food object
+			food.setPicCover(Checkpath.get(0));
+			foodservice.Save(food);
+			// add path image to DB
+			for (int i = 0; i < Checkpath.size(); i++) {
+				System.out.println("Size: " + Checkpath.size());
+				System.out.println("Send From Controller : " + Checkpath.get(i));
+				imageservice.SaveImage(food, Checkpath.get(i));
+			}
 			modelAndView.addObject("food", new Food());
 			modelAndView.addObject("success", "Add Item Successfully !!!");
 			modelAndView.setViewName("addItem");
-
 		}
-
 		return modelAndView;
 	}
 
@@ -156,6 +177,7 @@ public class FoodController {
 	public ModelAndView ShowDetailProducts(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView();
 		Food food = foodservice.ShowProducts(id);
+		modelAndView.addObject("PathImage", imService.GetListImage(id));
 		modelAndView.addObject("Products", food);
 		modelAndView.setViewName("product");
 

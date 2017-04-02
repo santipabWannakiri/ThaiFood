@@ -16,12 +16,14 @@
 	rel="stylesheet">
 
 <!-- Bootstrap -->
-<link th:href="@{../../css/bootstrap.css}" rel="stylesheet" media="screen" />
+<link th:href="@{../../css/bootstrap.css}" rel="stylesheet"
+	media="screen" />
 <!-- custom -->
 <link th:href="@{../../css/detail_product.css}" rel="stylesheet"
 	media="screen" />
 <link th:href="@{../../css/custom.css}" rel="stylesheet" media="screen" />
-<link th:href="@{../../css/iconSocail.css}" rel="stylesheet" media="screen" />
+<link th:href="@{../../css/iconSocail.css}" rel="stylesheet"
+	media="screen" />
 
 
 </head>
@@ -102,7 +104,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-4">
-				<img src="ImageSystem/logo_vitamin.png" class="img-responsive">
+				<img src="image/logo.png" class="img-responsive">
 			</div>
 
 			<div class="col-xs-8">
@@ -150,38 +152,41 @@
 	<!-- Detail Product -->
 	<div class="container">
 		<div class="card">
-			<div class="container-fliud" th:each="food : ${Products}">
+			<div class="container-fliud">
 				<div class="wrapper row">
+
 					<div class="preview col-md-5">
 
 						<div class="preview-pic tab-content">
 							<div class="tab-pane active" id="pic-1">
-								<img th:src="*{food.image}" />
+								<img th:src="${PathImage[0].pathImage}" />
 							</div>
 							<div class="tab-pane" id="pic-2">
-								<img src="https://www.images-iherb.com/v/MLI-01008-3.jpg" />
+								<img th:src="${PathImage[1].pathImage}" />
 							</div>
 							<div class="tab-pane" id="pic-3">
-								<img src="https://www.images-iherb.com/v/MLI-01010-3.jpg" />
+								<img th:src="${PathImage[2].pathImage}" />
 							</div>
 							<div class="tab-pane" id="pic-4">
-								<img src="https://www.images-iherb.com/v/MLI-00952-5.jpg" />
+								<img th:src="${PathImage[3].pathImage}" />
 							</div>
 						</div>
-						
 						<ul class="preview-thumbnail nav nav-tabs">
-							<li class="active"><a data-target="#pic-1" data-toggle="tab"><img
-									src="https://www.images-iherb.com/v/NWY-14610-10.jpg" /></a></li>
-							<li><a data-target="#pic-2" data-toggle="tab"><img
-									src="https://www.images-iherb.com/v/MLI-01008-3.jpg" /></a></li>
+							<li class="active"><a data-target="#pic-1"
+								data-toggle="tab"><img th:src="${PathImage[0].pathImage}" /></a>
+							</li>
+							<li th:if="${PathImage.size() >= 1}"><a data-target="#pic-2"
+								data-toggle="tab"><img th:src="${PathImage[1].pathImage}" /></a>
+							</li>
 							<li><a data-target="#pic-3" data-toggle="tab"><img
-									src="https://www.images-iherb.com/v/MLI-01010-3.jpg" /></a></li>
+									th:src="${PathImage[2].pathImage}" /></a></li>
 							<li><a data-target="#pic-4" data-toggle="tab"><img
-									src="https://www.images-iherb.com/v/MLI-00952-5.jpg" /></a></li>
+									th:src="${PathImage[3].pathImage}" /></a></li>
 						</ul>
 
 					</div>
-					<div class="details col-md-7"  >
+
+					<div class="details col-md-7" th:each="food : ${Products}">
 						<h3 class="product-title" th:text="*{food.name}"></h3>
 						<div class="rating">
 							<div class="stars">
@@ -192,7 +197,7 @@
 							</div>
 							<span class="review-no">41 reviews</span>
 						</div>
-						<p class="product-description"  th:text="*{food.detail}"></p>
+						<p class="product-description" th:text="*{food.detail}"></p>
 						<h4>
 							Manufacturer : <span style="color: skyblue">Centrum</span>
 						</h4>
@@ -391,6 +396,13 @@
 			</div>
 		</div>
 	</div>
+
+
+
+	<script src="../../js/jquery-3.1.1.min.js"></script>
+	<script src="../../js/bootstrap.min.js"></script>
+
+
 
 </body>
 
