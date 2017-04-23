@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+
 @Entity
 @Table(name = "Food")
 public class Food {
@@ -48,9 +49,12 @@ public class Food {
 
 	// name="createBy" << show to name column in database
 	@ManyToOne
-	@JoinColumn(name = "createBy", referencedColumnName = "user_id")
+	@JoinColumn(name = "createBy", referencedColumnName = "id")
 	private User referUser;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "food")
+	private List<Wishlist> Wishlist;
+	
 	@Column(name = "createDate")
 	private Date createDate;
 	
@@ -127,6 +131,14 @@ public class Food {
 		this.referUser = referUser;
 	}
 
+	public List<Wishlist> getWishlist() {
+		return Wishlist;
+	}
+
+	public void setWishlist(List<Wishlist> wishlist) {
+		Wishlist = wishlist;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -163,11 +175,10 @@ public class Food {
 	public String toString() {
 		return "Food [id=" + id + ", name=" + name + ", detail=" + detail + ", price=" + price + ", discount="
 				+ discount + ", promotionCode=" + promotionCode + ", images=" + images + ", referUser=" + referUser
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", PicCover=" + PicCover + ", active="
-				+ active + "]";
+				+ ", Wishlist=" + Wishlist + ", createDate=" + createDate + ", lastUpdate=" + lastUpdate + ", PicCover="
+				+ PicCover + ", active=" + active + "]";
 	}
 
-	
 
 	
 	

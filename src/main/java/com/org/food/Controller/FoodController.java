@@ -40,10 +40,10 @@ public class FoodController {
 	String filename = null;
 
 	@Autowired
-	private FoodService foodservice;
+	private FoodService foodService;
 
 	@Autowired
-	private ImagesService imageservice;
+	private ImagesService imageService;
 
 	@Autowired
 	private UserService userService;
@@ -57,7 +57,7 @@ public class FoodController {
 	@GetMapping("/show")
 	public ModelAndView show() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		modelAndView.addObject("FoodList", foodService.findByActiveTure());
 		modelAndView.setViewName("product");
 		return modelAndView;
 	}
@@ -65,8 +65,8 @@ public class FoodController {
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
-		// foodservice.findByActiveTure();
-		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		// foodService.findByActiveTure();
+		modelAndView.addObject("FoodList", foodService.findByActiveTure());
 		// cus.GetListImage(4);
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
@@ -93,7 +93,7 @@ public class FoodController {
 	@GetMapping("/list")
 	public ModelAndView ListProduct() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("FoodList", foodservice.findByActiveTure());
+		modelAndView.addObject("FoodList", foodService.findByActiveTure());
 		modelAndView.setViewName("listProduct");
 		return modelAndView;
 	}
@@ -138,12 +138,12 @@ public class FoodController {
 			}
 			// Set Path Image for cover & save Food object
 			food.setPicCover(Checkpath.get(0));
-			foodservice.Save(food);
+			foodService.Save(food);
 			// add path image to DB
 			for (int i = 0; i < Checkpath.size(); i++) {
 				System.out.println("Size: " + Checkpath.size());
 				System.out.println("Send From Controller : " + Checkpath.get(i));
-				imageservice.SaveImage(food, Checkpath.get(i));
+				imageService.SaveImage(food, Checkpath.get(i));
 			}
 			modelAndView.addObject("food", new Food());
 			modelAndView.addObject("success", "Add Item Successfully !!!");
@@ -155,7 +155,7 @@ public class FoodController {
 	@GetMapping("food/delete/{id}")
 	public ModelAndView DeleteItem(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView();
-		foodservice.Delete(id);
+		foodService.Delete(id);
 		modelAndView.setViewName("redirect:/list");
 
 		return modelAndView;
@@ -165,7 +165,7 @@ public class FoodController {
 	@GetMapping("product/edit/{id}")
 	public ModelAndView EditProduct(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView();
-		Food food = foodservice.Edit(id);
+		Food food = foodService.Edit(id);
 		modelAndView.addObject("ListFoodEdit", food);
 		modelAndView.setViewName("editProduct");
 
@@ -176,7 +176,7 @@ public class FoodController {
 	@GetMapping("product/show/{id}")
 	public ModelAndView ShowDetailProducts(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView();
-		Food food = foodservice.ShowProducts(id);
+		Food food = foodService.ShowProducts(id);
 		modelAndView.addObject("PathImage", imService.GetListImage(id));
 		modelAndView.addObject("Products", food);
 		modelAndView.setViewName("product");
@@ -189,7 +189,7 @@ public class FoodController {
 	public ModelAndView SaveEdit(@Valid Food food) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(food.toString());
-		foodservice.SaveEdit(food);
+		foodService.SaveEdit(food);
 		System.out.println("Update ID : " + food.getId());
 		modelAndView.setViewName("redirect:/list");
 

@@ -172,9 +172,8 @@
 							</div>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
-							<li class="active"><a data-target="#pic-1"
-								data-toggle="tab"><img th:src="${PathImage[0].pathImage}" /></a>
-							</li>
+							<li class="active"><a data-target="#pic-1" data-toggle="tab"><img
+									th:src="${PathImage[0].pathImage}" /></a></li>
 							<li th:if="${PathImage.size() >= 1}"><a data-target="#pic-2"
 								data-toggle="tab"><img th:src="${PathImage[1].pathImage}" /></a>
 							</li>
@@ -219,9 +218,12 @@
 								to cart</button>
 
 							<div class="row" style="padding-top: 10px">
-								<button class="like btn btn-default" type="button">
-									<span class="fa fa-heart"> Add to Wishlist</span>
-								</button>
+
+								<a th:href="${'/save/wishlist/' + food.id}">
+									<button class="like btn btn-default" type="button">
+										<span class="fa fa-heart"> Add to Wishlist</span>
+									</button>
+								</a>
 								<button class="like btn btn-default" type="button">
 									<span class="fa fa-retweet"> Add to Compare list</span>
 								</button>

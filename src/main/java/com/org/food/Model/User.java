@@ -26,7 +26,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "id")
 	private int id;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
@@ -52,6 +52,9 @@ public class User {
 	//mappedBy field that owns the relationship
 	@OneToMany(mappedBy="referUser")
 	private List<Food> food;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Wishlist> Wishlist;
 
 	public int getId() {
 		return id;
@@ -117,11 +120,21 @@ public class User {
 		this.food = food;
 	}
 
+	public List<Wishlist> getWishlist() {
+		return Wishlist;
+	}
+
+	public void setWishlist(List<Wishlist> wishlist) {
+		Wishlist = wishlist;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", lastName="
-				+ lastName + ", active=" + active + ", roles=" + roles + ", food=" + food + "]";
+				+ lastName + ", active=" + active + ", roles=" + roles + ", food=" + food + ", Wishlist=" + Wishlist
+				+ "]";
 	}
+	
 
 	
 
