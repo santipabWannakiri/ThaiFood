@@ -57,9 +57,9 @@
 									</div>
 								</div>
 							</div>
-							<h4 class="text-right" th:with="result=${food.price},cal=0" th:with="cal=(#{result}*${food.price})">
+							<!--  <h4 class="text-right" th:with="result=${food.price},cal=0" th:with="cal=(#{result}*${food.price})">
 								Total <strong th:text="${cal}"></strong>
-							</h4>
+							</h4> -->
 							
 						</div>
 						<hr>
@@ -79,7 +79,7 @@
 					<div class="panel-footer">
 						<div class="row text-center">
 							<div class="col-md-9">
-								<h4 class="text-right">Total <strong>$50.00</strong></h4>
+								<h4 class="text-right">Total <strong th:text="${total}"></strong></h4>
 							</div>
 							<div class="col-md-3">
 								<button type="button" class="btn btn-info">

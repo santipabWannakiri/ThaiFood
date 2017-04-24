@@ -9,4 +9,8 @@ public interface WishlistService {
 	public List<Food> getWishlist(String u);
 
 	public void saveWishlist(int id,String user);
+	
+	public Double totalPrice(String u);
+	
+	public Long countWishlist(String u);
 }

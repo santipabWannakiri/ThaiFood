@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.hamcrest.collection.IsEmptyCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,11 +26,13 @@ import com.org.food.Model.Images;
 import com.org.food.Model.SeacrFood;
 import com.org.food.Model.User;
 import com.org.food.Repository.CustomImageRepository;
+import com.org.food.Repository.CustomWishlistRepository;
 import com.org.food.Repository.FoodRepository;
 import com.org.food.Repository.ImagesReposotiry;
 import com.org.food.Service.FoodService;
 import com.org.food.Service.ImagesService;
 import com.org.food.Service.UserService;
+import com.org.food.Service.WishlistService;
 
 @Controller
 public class FoodController {
@@ -52,7 +53,7 @@ public class FoodController {
 	private ImagesService imService;
 
 	@Autowired
-	private CustomImageRepository cus;
+	private WishlistService wishlistService;
 
 	@GetMapping("/show")
 	public ModelAndView show() {
@@ -65,9 +66,11 @@ public class FoodController {
 	@GetMapping("/")
 	public ModelAndView indexShow() {
 		ModelAndView modelAndView = new ModelAndView();
-		// foodService.findByActiveTure();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String user = authentication.getName();
+
 		modelAndView.addObject("FoodList", foodService.findByActiveTure());
-		// cus.GetListImage(4);
+		modelAndView.addObject("AmountWishlist", wishlistService.countWishlist(user));
 		modelAndView.setViewName("index_vitamin");
 		return modelAndView;
 	}
@@ -101,13 +104,12 @@ public class FoodController {
 	@PostMapping("/add")
 	public ModelAndView SaveItem(@Valid Food food, @RequestParam("file") MultipartFile[] file,
 			BindingResult bindingResult) {
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		final String NoimagePath = "/ImageSystem/no-image.png";
 		String paths = null;
 		List<String> Checkpath = new ArrayList<String>();
-		
-		
+
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("addItem");
 		} else {
@@ -131,7 +133,7 @@ public class FoodController {
 				for (int loop = 0; loop < 4; loop++) {
 					Checkpath.add(NoimagePath);
 				}
-			} else if ((Checkpath.size()-1) != 3) {
+			} else if ((Checkpath.size() - 1) != 3) {
 				for (int loop = Checkpath.size(); loop < 4; loop++) {
 					Checkpath.add(NoimagePath);
 				}

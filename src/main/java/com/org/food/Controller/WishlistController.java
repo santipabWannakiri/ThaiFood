@@ -19,8 +19,12 @@ public class WishlistController {
 	@GetMapping("/wishlist")
 	public ModelAndView getWishlist(){
 		ModelAndView modelAndView = new ModelAndView();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String user = authentication.getName();
 		
-		modelAndView.addObject("product", WishService.getWishlist("admin@gmail.com"));
+		modelAndView.addObject("product", WishService.getWishlist(user));
+		modelAndView.addObject("total",WishService.totalPrice(user));
+		
 		modelAndView.setViewName("wishlist");
 		
 		return modelAndView;

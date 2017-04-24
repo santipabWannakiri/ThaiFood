@@ -85,8 +85,8 @@
 							<li><a
 								th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
 								th:href="@{/wishlist}" class="ico-wishlist"> <span
-									class="wishlist-label">Wishlist</span><span
-									class="wishlist-qty">(0)</span>
+									class="wishlist-label">Wishlist</span>
+									<span class="wishlist-qty">(<span th:text="${AmountWishlist}"></span>)</span>
 							</a></li>
 							<li id="topcartlink"><a
 								th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
@@ -279,7 +279,7 @@
 								class="glyphicon glyphicon-star"></span>
 						</p>
 					</div>
-					<button type="button" class="btn btn-success">ADD TO CART</button>
+<!-- 					<button type="button" class="btn btn-success">ADD TO CART</button> -->
 				</div>
 
 			</div>

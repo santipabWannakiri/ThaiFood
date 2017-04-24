@@ -48,4 +48,18 @@ public class WishlistServiceImp implements WishlistService {
 
 	}
 
+	@Override
+	public Double totalPrice(String u) {
+
+		Double total = customwishRepo.tatolPrice(u);
+
+		return total;
+	}
+
+	@Override
+	public Long countWishlist(String u) {
+		Long amount = customwishRepo.countWishlist(u);
+		return amount;
+	}
+
 }
