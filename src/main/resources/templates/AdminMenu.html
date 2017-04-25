@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+	<div th:fragment="admin">
+		<!-- 		Tab-TopMenu -->
+		<!-- 		<div class="margin-bottom-5px"> -->
+		<!-- 				<div class="bg-buy1-get1"> -->
+		<!-- 					<div class="container"> -->
+		<!-- 						<div class="row"> -->
+		<!-- 							<div class="col-md-12"> -->
+		<!-- 								<h1 class="text-white text-uppercase text-center top-highlight"> -->
+		<!-- 									<strong>Buy 1, Get 1 half off </strong>select vitamins essentials -->
+		<!-- 								</h1> -->
+		<!-- 							</div> -->
+		<!-- 						</div> -->
+		<!-- 					</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+
+
+
+		<div class="container">
+
+			<!-- 						Left-Right-Text -->
+			<!-- 					<div class="margin-bottom-5px"> -->
+			<!-- 						<div class="row"> -->
+			<!-- 							<div class="col-sm-4 "> -->
+			<!-- 								<span class="free-shipping pull-left">FREE SHIPPING&nbsp;</span> <span -->
+			<!-- 									class="free-shipping-lowercase"> on orders $49 or more*</span> -->
+			<!-- 							</div> -->
+			<!-- 							<div class="col-sm-4"></div> -->
+			<!-- 							<div class="col-sm-4 "> -->
+			<!-- 								<span class="free-shipping pull-left">FREE CLICK &amp; -->
+			<!-- 									COLLECT&nbsp; </span> <span class="free-shipping-lowercase"> on -->
+			<!-- 									all orders over $20</span> -->
+			<!-- 							</div> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+
+			<div class="row">
+				<div class="header-upper">
+					<div class="col-xs-6  col-md-2"></div>
+
+					<div class="col-md-3"></div>
+					<div class="col-xs-7 col-md-7">
+						<div class="col-xs-3 col-md-3">
+
+							<!-- 						<div -->
+							<!-- 							th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"> -->
+							<!-- 							<div class="hi-text"> -->
+							<!-- 								Hi : <span sec:authentication="name"></span> <br> Roles: <span -->
+							<!-- 									sec:authentication="principal.authorities"></span> -->
+							<!-- 							</div> -->
+							<!-- 						</div> -->
+						</div>
+
+						<div class="col-xs-9 col-md-9">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a
+									th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+									th:href="@{/registration}"><span
+										class="glyphicon glyphicon-user"></span> Register</a></li>
+								<li><a
+									th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+									th:href="@{/login}"><span
+										class="glyphicon glyphicon-log-in"></span>Log in</a></li>
+
+								<li><a
+									th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+									th:href="@{/wishlist}" class="ico-wishlist"> <span
+										class="wishlist-label">Wishlist</span> <span
+										class="wishlist-qty">(<span th:text="${AmountWishlist}"></span>)
+									</span>
+								</a></li>
+								<li id="topcartlink"><a
+									th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+									th:href="@{/add}" class="ico-cart"> <span
+										class="cart-label">Shopping cart</span><span class="cart-qty">(0)</span>
+								</a></li>
+								<li><a
+									th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+									th:href="@{/logout}"><span
+										class="glyphicon glyphicon-log-in"></span>Log out</a></li>
+							</ul>
+
+							<!-- Menu Admin -->
+							<div
+								th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+								<div class="collapse navbar-collapse"
+									id="bs-example-navbar-collapse-1">
+									<ul class="nav navbar-nav navbar-right">
+										<li class="dropdown"><a href="#" class="dropdown-toggle"
+											data-toggle="dropdown"><span
+												class="glyphicon glyphicon-user"></span>Admin <b
+												class="caret"></b></a>
+											<ul class="dropdown-menu">
+												<li><a href="#"><span
+														class="glyphicon glyphicon-user"></span>Profile</a></li>
+												<li><a href="#"><span
+														class="glyphicon glyphicon-cog"></span>Settings</a></li>
+												<li class="divider"></li>
+												<li><a href="#"><span
+														class="glyphicon glyphicon-off"></span>Logout</a></li>
+											</ul></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

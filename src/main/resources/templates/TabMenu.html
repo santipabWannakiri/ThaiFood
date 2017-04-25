@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<div th:fragment="tabmenu">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4">
+					<img src="/ImageSystem/thaifood_logo.png" class="img-responsive">
+				</div>
+
+				<div class="col-xs-8">
+					<nav class="navbar navbar-default navbar-inverse navbar-custom"
+						role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle navbar-toggle-custom"
+								data-toggle="collapse" data-target=".navbar-ex1-collapse">
+								<span class="sr-only">Desplegar navegación</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse navbar-ex1-collapse">
+							<ul class="nav navbar-nav under-line">
+								<li><a href="#">50+</a></li>
+								<li><a href="#">Kids</a></li>
+								<li><a href="#">Men</a></li>
+								<li><a href="#">Women</a></li>
+								<li><a href="#">Probiotic</a></li>
+								<li><a href="#">Co-Enzyme Q10</a></li>
+								<li><a href="#">Collagen</a></li>
+								<li><a href="#">Vitamins</a></li>
+								<li><a href="#">Soap</a></li>
+							</ul>
+
+							<div class="row">
+								<form class="navbar-form navbar-left" role="search">
+									<div class="form-group">
+										<input type="text" class="form-control"
+											placeholder="Search store">
+									</div>
+									<button class="btn-custom btn-primary-custom" type="button">
+										<i class="glyphicon glyphicon-search icon-search"></i>
+									</button>
+								</form>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

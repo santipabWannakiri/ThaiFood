@@ -81,7 +81,11 @@
 					</div>
 
 					<span th:utext="${success}"></span>
+				  <div th:insert="footer :: copy"></div>
 
+				  <div th:replace="footer :: copy"></div>
+				
+				  <div th:include="footer :: copy"></div>
 
 				</form>
 			</div>

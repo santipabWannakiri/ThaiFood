@@ -24,7 +24,7 @@ public class WishlistController {
 		
 		modelAndView.addObject("product", WishService.getWishlist(user));
 		modelAndView.addObject("total",WishService.totalPrice(user));
-		
+		modelAndView.addObject("AmountWishlist", WishService.countWishlist(user));
 		modelAndView.setViewName("wishlist");
 		
 		return modelAndView;
